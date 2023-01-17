@@ -32,15 +32,17 @@ public class TennisMatch {
                 } else {
                     if (score.playerOnePoints() == Point.FORTY && turnOutcome == TurnOutcome.PlayerOneScores) {
                         newState = MatchState.PLAYER_ONE_WON;
-                    }
-                    else if (score.playerTwoPoints() == Point.FORTY && turnOutcome == TurnOutcome.PlayerTwoScores) {
+                    } else if (score.playerTwoPoints() == Point.FORTY && turnOutcome == TurnOutcome.PlayerTwoScores) {
                         newState = MatchState.PLAYER_TWO_WON;
                     }
                 }
             }
-            case DEUCE -> newState = turnOutcome == TurnOutcome.PlayerOneScores ? MatchState.ADVANTAGE_PLAYER_ONE : MatchState.ADVANTAGE_PLAYER_TWO;
-            case ADVANTAGE_PLAYER_ONE -> newState = turnOutcome == TurnOutcome.PlayerOneScores ? MatchState.PLAYER_ONE_WON : MatchState.DEUCE;
-            case ADVANTAGE_PLAYER_TWO -> newState = turnOutcome == TurnOutcome.PlayerTwoScores ? MatchState.PLAYER_TWO_WON : MatchState.DEUCE;
+            case DEUCE ->
+                    newState = turnOutcome == TurnOutcome.PlayerOneScores ? MatchState.ADVANTAGE_PLAYER_ONE : MatchState.ADVANTAGE_PLAYER_TWO;
+            case ADVANTAGE_PLAYER_ONE ->
+                    newState = turnOutcome == TurnOutcome.PlayerOneScores ? MatchState.PLAYER_ONE_WON : MatchState.DEUCE;
+            case ADVANTAGE_PLAYER_TWO ->
+                    newState = turnOutcome == TurnOutcome.PlayerTwoScores ? MatchState.PLAYER_TWO_WON : MatchState.DEUCE;
             case PLAYER_ONE_WON, PLAYER_TWO_WON -> throw new InvalidGameStateException();
         }
 
@@ -49,7 +51,9 @@ public class TennisMatch {
 
     public Optional<Player> getWinner() {
         switch (matchState) {
-            case PLAYER_ONE_WON -> {return Optional.of(playerOne);}
+            case PLAYER_ONE_WON -> {
+                return Optional.of(playerOne);
+            }
             case PLAYER_TWO_WON -> {
                 return Optional.of(playerTwo);
             }
