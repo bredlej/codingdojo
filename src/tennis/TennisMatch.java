@@ -24,7 +24,7 @@ public class TennisMatch {
 
     public TennisMatch updateForOutcome(TurnOutcome turnOutcome) throws InvalidGameStateException {
         MatchState newState = matchState;
-        Score newScore = updateScore(turnOutcome, score);
+        Score newScore = score.update(turnOutcome);
         switch (matchState) {
             case ONGOING -> {
                 if (newScore.isDeuce()) {
@@ -55,17 +55,6 @@ public class TennisMatch {
             }
         }
         return Optional.empty();
-    }
-    private Score updateScore(TurnOutcome outcome, Score previousScore) throws InvalidGameStateException {
-        switch (outcome) {
-            case PlayerOneScores -> {
-                return new Score(previousScore.playerOnePoints().next(), previousScore.playerTwoPoints());
-            }
-            case PlayerTwoScores -> {
-                return new Score(previousScore.playerOnePoints(), previousScore.playerTwoPoints().next());
-            }
-        }
-        throw new InvalidGameStateException();
     }
 
     public Score getScore() {
