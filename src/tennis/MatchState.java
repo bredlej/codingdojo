@@ -1,0 +1,5 @@
+package tennis;
+
+public enum MatchState {
+    ONGOING, DEUCE, ADVANTAGE_PLAYER_ONE, ADVANTAGE_PLAYER_TWO, PLAYER_ONE_WON, PLAYER_TWO_WON
+}
